@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+
+:root{
+    --bg-deep:#0a0e1a;
+    --accent-a:#6366f1;
+    --accent-b:#06b6d4;
+    --text-muted:#94a3b8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter','Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(99,102,241,.25), transparent 45%),
+        radial-gradient(circle at 90% 0%, rgba(6,182,212,.2), transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(244,63,94,.12), transparent 45%),
+        var(--bg-deep);
+    background-attachment:fixed;
+}
+
+#root{
+    width:100%;
+    padding:32px 40px 60px;
+}
+
+.contenedor{
+    width:100%;
+    max-width:1700px;
+    margin:auto;
+}
+
+/*---------------- TOPBAR ----------------*/
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 24px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    margin-bottom:40px;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+}
+
+.marca{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.marca-logo{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    color:#fff;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:14px;
+}
+
+.marca-nombre{
+    font-family:'Sora',sans-serif;
+    color:#fff;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.2px;
+}
+
+.marca-version{
+    color:var(--text-muted);
+    font-size:13px;
+    font-weight:500;
+    padding:6px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:30px;
+}
+
+/*---------------- TITULO ----------------*/
+
+h1{
+    font-family:'Sora',sans-serif;
+    color:#fff;
+    text-align:center;
+    font-size:48px;
+    font-weight:800;
+    line-height:1.25;
+    letter-spacing:-1px;
+    background:linear-gradient(135deg,#c7d2fe,#67e8f9);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitulo{
+    color:var(--text-muted);
+    text-align:center;
+    font-size:16px;
+    max-width:520px;
+    margin:12px auto 40px;
+    line-height:1.5;
+}
+
+/*---------------- SALUDO ----------------*/
+
+.saludo{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:22px;
+    color:#fff;
+    padding:34px 32px;
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.saludo::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,var(--accent-a),var(--accent-b),var(--accent-a));
+    background-size:200% 100%;
+    animation:desplazarAcento 6s linear infinite;
+}
+
+@keyframes desplazarAcento{
+    0%{ background-position:0% 0; }
+    100%{ background-position:200% 0; }
+}
+
+.saludo h2{
+    font-family:'Sora',sans-serif;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.saludo h3{
+    display:inline-block;
+    font-size:13px;
+    font-weight:600;
+    color:#a5f3fc;
+    background:rgba(6,182,212,.12);
+    border:1px solid rgba(6,182,212,.3);
+    padding:7px 18px;
+    border-radius:30px;
+    margin-bottom:14px;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+}
+
+.saludo p{
+    color:var(--text-muted);
+    font-size:14px;
+    max-width:440px;
+    margin:0 auto;
+    line-height:1.6;
+}
+
+/*======================
+      RESPONSIVE
+=======================*/
+
+@media(max-width:768px){
+
+    #root{
+        padding:20px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+}
