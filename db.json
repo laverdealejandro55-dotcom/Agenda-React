@@ -1,0 +1,33 @@
+{
+  "contactos": [
+    {
+      "id": "1",
+      "nombre": "David",
+      "apellido": "Blandon",
+      "telefono": "3234226707",
+      "etiqueta": "Parcero"
+    },
+    {
+      "id": "2",
+      "nombre": "Laura",
+      "apellido": "Gómez",
+      "telefono": "3001234567",
+      "etiqueta": "Familia"
+    },
+    {
+      "id": "3",
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "telefono": "3119876543",
+      "etiqueta": "Instructor"
+    },
+    {
+      "nombre": "dad",
+      "apellido": "ddd",
+      "telefono": "ddd",
+      "etiqueta": "dd",
+      "id": "CvZWEsQcwoU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
