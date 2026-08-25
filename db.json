@@ -22,11 +22,18 @@
       "etiqueta": "Instructor"
     },
     {
-      "nombre": "dad",
-      "apellido": "ddd",
-      "telefono": "ddd",
-      "etiqueta": "dd",
-      "id": "CvZWEsQcwoU"
+      "nombre": "Johan ",
+      "apellido": "Laverde",
+      "telefono": "1231342342",
+      "etiqueta": "Autor",
+      "id": "y2dydrcl6fI"
+    },
+    {
+      "nombre": "Esteban",
+      "apellido": "Narvaez",
+      "telefono": "1234567",
+      "etiqueta": "Enemigo",
+      "id": "yV4O6Jsxnfk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
