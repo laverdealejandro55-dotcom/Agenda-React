@@ -43,6 +43,12 @@ function Formulario() {
   // Mensaje de éxito en verde cuando se guarda correctamente (mini reto punto 2)
   const [exito, setExito] = useState(null);
 
+  // Término de búsqueda digitado por el usuario
+  const [busqueda, setBusqueda] = useState("");
+
+  // Orden de los contactos: true = A-Z, false = Z-A
+  const [ordenAsc, setOrdenAsc] = useState(true);
+
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -204,6 +210,30 @@ function Formulario() {
       );
   }
 
+  // Contactos filtrados por nombre, apellido o etiqueta (no modifica "contactos")
+  const contactosFiltrados = contactos.filter((c) => {
+    const termino = busqueda.toLowerCase();
+    const nombre = c.nombre.toLowerCase();
+    const apellido = (c.apellido || "").toLowerCase();
+    const etiqueta = (c.etiqueta || "").toLowerCase();
+
+    return (
+      nombre.includes(termino) ||
+      apellido.includes(termino) ||
+      etiqueta.includes(termino)
+    );
+  });
+
+  // Copia ordenada alfabéticamente por nombre, según ordenAsc
+  const contactosOrdenados = [...contactosFiltrados].sort((a, b) => {
+    const nombreA = a.nombre.toLowerCase();
+    const nombreB = b.nombre.toLowerCase();
+
+    if (nombreA < nombreB) return ordenAsc ? -1 : 1;
+    if (nombreA > nombreB) return ordenAsc ? 1 : -1;
+    return 0;
+  });
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-7 items-start">
 
@@ -231,11 +261,10 @@ function Formulario() {
               placeholder="Nombre"
               value={form.nombre}
               onChange={handleChange}
-              className={`w-full border rounded-md px-4 py-2.5 text-sm outline-none focus:ring-2 ${
-                erroresCampos.nombre
+              className={`w-full border rounded-md px-4 py-2.5 text-sm outline-none focus:ring-2 ${erroresCampos.nombre
                   ? "border-red-400 focus:ring-red-400"
                   : "border-gray-300 focus:ring-purple-500"
-              }`}
+                }`}
             />
             {erroresCampos.nombre && (
               <p className="text-red-600 text-xs mt-1">
@@ -262,11 +291,10 @@ function Formulario() {
               placeholder="Teléfono"
               value={form.telefono}
               onChange={handleChange}
-              className={`w-full border rounded-md px-4 py-2.5 text-sm outline-none focus:ring-2 ${
-                erroresCampos.telefono
+              className={`w-full border rounded-md px-4 py-2.5 text-sm outline-none focus:ring-2 ${erroresCampos.telefono
                   ? "border-red-400 focus:ring-red-400"
                   : "border-gray-300 focus:ring-purple-500"
-              }`}
+                }`}
             />
             {erroresCampos.telefono && (
               <p className="text-red-600 text-xs mt-1">
@@ -301,8 +329,8 @@ function Formulario() {
               {guardando
                 ? "Guardando..."
                 : editandoId !== null
-                ? "Guardar cambios"
-                : "Agregar contacto"}
+                  ? "Guardar cambios"
+                  : "Agregar contacto"}
             </button>
 
             {editandoId !== null && (
@@ -337,6 +365,91 @@ function Formulario() {
           </div>
         )}
 
+        {!cargando && contactos.length > 0 && (
+          <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
+            {/* Buscador */}
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+                  />
+                </svg>
+              </div>
+
+              <input
+                type="text"
+                className="
+        w-full
+        pl-11 pr-4 py-3
+        rounded-2xl
+        bg-white
+        border border-gray-200
+        text-gray-800
+        placeholder-gray-400
+        shadow-sm
+        outline-none
+        transition-all duration-200
+        focus:border-purple-500
+        focus:ring-4
+        focus:ring-purple-500/15
+        hover:border-gray-300
+      "
+                placeholder="Buscar por nombre, apellido o etiqueta..."
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+              />
+            </div>
+
+            {/* Botón ordenar */}
+            <button
+              type="button"
+              onClick={() => setOrdenAsc((prev) => !prev)}
+              className="
+      flex items-center justify-center gap-2
+      px-5 py-3
+      rounded-2xl
+      bg-white
+      text-gray-700
+      text-sm font-medium
+      border border-gray-200
+      shadow-sm
+      transition-all duration-200
+      hover:bg-gray-50
+      hover:border-purple-300
+      hover:text-purple-600
+      hover:shadow-md
+      active:scale-95
+      whitespace-nowrap
+    "
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 6h18M6 12h12m-9 6h6"
+                />
+              </svg>
+
+              {ordenAsc ? "Ordenar Z-A" : "Ordenar A-Z"}
+            </button>
+          </div>
+        )}
+
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
           {cargando ? (
             <p className="col-span-full text-center text-slate-300 text-sm py-12 px-5 bg-white/5 border border-dashed border-white/20 rounded-xl">
@@ -346,8 +459,12 @@ function Formulario() {
             <p className="col-span-full text-center text-slate-300 text-sm py-12 px-5 bg-white/5 border border-dashed border-white/20 rounded-xl">
               Aún no tienes contactos guardados. ¡Agrega el primero! ✨
             </p>
+          ) : contactosOrdenados.length === 0 ? (
+            <p className="col-span-full text-center text-slate-300 text-sm py-12 px-5 bg-white/5 border border-dashed border-white/20 rounded-xl">
+              No se encontraron contactos que coincidan con la búsqueda.
+            </p>
           ) : (
-            contactos.map((contacto) => (
+            contactosOrdenados.map((contacto) => (
               <ContactoCard
                 key={contacto.id}
                 nombre={contacto.nombre}

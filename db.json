@@ -5,7 +5,7 @@
       "nombre": "David",
       "apellido": "Blandon",
       "telefono": "3234226707",
-      "etiqueta": "Parcero"
+      "etiqueta": "Pareja"
     },
     {
       "id": "2",
@@ -22,18 +22,39 @@
       "etiqueta": "Instructor"
     },
     {
+      "id": "y2dydrcl6fI",
       "nombre": "Johan ",
       "apellido": "Laverde",
       "telefono": "1231342342",
-      "etiqueta": "Autor",
-      "id": "y2dydrcl6fI"
+      "etiqueta": "Prota"
     },
     {
+      "id": "yV4O6Jsxnfk",
       "nombre": "Esteban",
       "apellido": "Narvaez",
       "telefono": "1234567",
+      "etiqueta": "Duo-Dinamico"
+    },
+    {
+      "nombre": "Tomas ",
+      "apellido": "Villa",
+      "telefono": "7654321",
+      "etiqueta": "Ex pareja",
+      "id": "F3jNz5MSd6k"
+    },
+    {
+      "id": "vgbXsUM1uXc",
+      "nombre": "Jeronimo",
+      "apellido": "Zapata",
+      "telefono": "76555312",
+      "etiqueta": "ex-moza"
+    },
+    {
+      "nombre": "Andres",
+      "apellido": "Taborda",
+      "telefono": "6767676767",
       "etiqueta": "Enemigo",
-      "id": "yV4O6Jsxnfk"
+      "id": "QafqrFbnBXc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
